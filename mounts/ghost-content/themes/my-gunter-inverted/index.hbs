@@ -1,0 +1,21 @@
+{{!< default}}
+
+{{> "menu"}}
+
+<header class="main-header {{#if @blog.cover_image}}" style="background-image: url({{@blog.cover_image}}){{else}}no-cover{{/if}}">
+	<figure class="logo">
+		{{#if @blog.logo}}<a href="{{@blog.url}}"><img class="img-logo" src="{{@blog.logo}}" alt="Logo Blog"></a>{{/if}}
+	</figure>
+	<div class="title">
+		<a href="{{@blog.url}}">
+			<h1>{{@blog.title}}</h1>
+		</a>
+		<p>{{@blog.description}}</p>
+	</div>
+</header>
+
+<section class="posts">
+
+	{{> "loop"}}
+
+</section>

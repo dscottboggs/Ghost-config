@@ -1,0 +1,50 @@
+version: '3.5'
+
+services:
+
+  madscientists_blog:
+    image: ghost:alpine
+    environment:
+      database__client: mysql
+      database__connection__host: madscientists_blog_db
+      database__connection__user: root
+      database__connection__database: ghost
+    env_file:
+      - ./ghost.pw.env
+    expose:
+      - 2368
+    labels:
+      traefik.docker.network: web
+      traefik.enable: "true"
+      traefik.domain: madscientists.co
+      traefik.madscientists_blog.frontend.rule: Host:madscientists.co,blog.madscientists.co,tams.tech,blog.tams.tech
+      traefik.madscientists_blog.port: 2368
+      traefik.madscientists_blog.protocol: http
+    volumes:
+      - type: bind
+        source: ./mounts/ghost-content
+        target: /var/lib/ghost/content
+    networks:
+      - web
+      - default
+    depends_on:
+      - madscientists_blog_db
+
+  madscientists_blog_db:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: ghost
+    expose:
+      - 3306
+    env_file:
+      - ./mysql.pw.env
+    networks:
+      - default
+    volumes:
+      - type: bind
+        source: ./mounts/database
+        target: /var/lib/mysql
+
+networks:
+  web:
+    external: true
