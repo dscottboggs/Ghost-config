@@ -1,3 +1,4 @@
 *.pw.env
 mounts/database
 logs/
+mounts/

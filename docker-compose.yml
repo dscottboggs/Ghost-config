@@ -20,7 +20,7 @@ services:
       traefik.madscientists_blog.frontend.rule: Host:madscientists.co,blog.madscientists.co,tams.tech,blog.tams.tech
       traefik.madscientists_blog.port: 2368
       traefik.madscientists_blog.protocol: http
-      tech.tams.dns_host: madscientists.co,blog.madscientists.co,tams.tech,blog.tams.tech
+      tech.tams.dns_host: zone:madscientists-co&host:madscientists.co,blog.madscientists.co;zone:tams-tech&host:tams.tech,blog.tams.tech
     volumes:
       - type: bind
         source: ./mounts/ghost-content
